@@ -8,17 +8,15 @@ namespace FictitiousInsurance.Helper
     {
         public static string GetConfigValue(string key)
         {
-            try
+
+            var value = ConfigurationManager.AppSettings.Get(key);
+            if (string.IsNullOrEmpty(value))
             {
-                var value = ConfigurationManager.AppSettings.Get(key);
-                return value;
-            }
-            catch (Exception ex)
-            {
-                LogHelper.LogException($"ConfigHelper.GetConfigValue: Unable to find value for key: {key}", ex);
+                LogHelper.LogException($"ConfigHelper.GetConfigValue: Unable to find value for key: {key}");
                 throw new TechnicalExceptions($"Unable to find value for key: {key}");
             }
-            
+            return value;
+
         }
     }
 }
