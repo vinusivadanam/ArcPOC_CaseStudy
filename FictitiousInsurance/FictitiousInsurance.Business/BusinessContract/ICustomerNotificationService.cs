@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FictitiousInsurance.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,6 @@ namespace FictitiousInsurance.Business
         /// Will generate the renewal letters for customers whos policies are due.
         /// </summary>
         /// <returns>String: Notification file generation response </returns>
-        string GenerateRenewalNotificationLetter();
+        ApiResponse GenerateRenewalNotificationLetter();
     }
 }

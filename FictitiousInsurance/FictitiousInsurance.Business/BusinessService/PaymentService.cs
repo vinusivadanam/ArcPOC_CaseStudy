@@ -28,12 +28,14 @@ namespace FictitiousInsurance.Business
                 if (x.PaymentDetails == null)
                 {
                     LogHelper.LogException($"PaymentService.CalculatePremiumDetails failed for customer {x.CustomerId}, No payment information available.");
-                    continue;
                 }
-                x.PaymentDetails.CreditCharge = CalculateCreditCharge(x);
-                x.PaymentDetails.TotalPremium = CalculateTotalPremium(x);
-                x.PaymentDetails.AvgMonthlyPremium = CalculateAvgMonthlyPremium(x);
-                CalculateMonthlyPayAmounts(x);
+                else
+                {
+                    x.PaymentDetails.CreditCharge = CalculateCreditCharge(x);
+                    x.PaymentDetails.TotalPremium = CalculateTotalPremium(x);
+                    x.PaymentDetails.AvgMonthlyPremium = CalculateAvgMonthlyPremium(x);
+                    CalculateMonthlyPayAmounts(x);
+                }
             }
 
             res = true;

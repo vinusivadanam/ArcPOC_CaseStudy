@@ -22,19 +22,23 @@ namespace FictitiousInsurance.Business
         /// Will generate the renewal letters for customers whos policies are due.
         /// </summary>
         /// <returns>String: Notification file generation response </returns>
-        public string GenerateRenewalNotificationLetter()
+        public ApiResponse GenerateRenewalNotificationLetter()
         {
             var _policyDueCustomers = _custSvc.GetPolicyDueCustomerDetails();
             var customerNotificationDetails = MapCustomerToRenewalNotification(_policyDueCustomers);
             var fileTemplate = _custNotifRepo.GetRenewalNotificationTemplate();
-            
+            ApiResponse response = new ApiResponse();
             customerNotificationDetails.ForEach(x => {
                 var fileName = GenerateRenewalNotificationLetterFileName(x);
                 var fileContent = CreateNotificationFileContent(fileTemplate, x);
-                _custNotifRepo.GenerateRenewalNotificationLetter(fileContent, fileName);
+                if (_custNotifRepo.GenerateRenewalNotificationLetter(fileContent, fileName))
+                    response.ProcessedCount += 1;
+                else
+                    response.ErrorCount += 1;
             });
-
-            return "GenerateRenewalNotificationLetter: Service Completed Successfully.";
+            response.Success = true;
+            response.Message = "GenerateRenewalNotificationLetter: Service Completed Successfully.";
+            return response;
         }
         /// <summary>
         /// Generate file name for notification letter based on FirstName and Customer Id
@@ -72,9 +76,6 @@ namespace FictitiousInsurance.Business
             }
             customer.ForEach(x =>
                 {
-                    if (x.ProductDetails == null || x.PaymentDetails == null)
-                    {
-                    }
                     notificationList.Add(new RenewalNotificationModel()
                     {
                         CustomerId = x.CustomerId,

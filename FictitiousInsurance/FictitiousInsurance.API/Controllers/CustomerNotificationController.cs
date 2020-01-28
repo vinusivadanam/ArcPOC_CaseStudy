@@ -22,11 +22,12 @@ namespace FictitiousInsurance.API.Controllers
             try
             {
                 var resp = _custNotificationSvc.GenerateRenewalNotificationLetter();
+
                 return Request.CreateResponse(HttpStatusCode.OK, resp);
             }
             catch (TechnicalExceptions ex)
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, ex.Message); 
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new ApiResponse { Success = false, Message = ex.Message });
             }
         }
         
