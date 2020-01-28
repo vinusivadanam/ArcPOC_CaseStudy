@@ -6,6 +6,9 @@ using System.Web.Http;
 
 namespace FictitiousInsurance.API.Controllers
 {
+    /// <summary>
+    /// Controller will contain all the Notification related actions
+    /// </summary>
     public class CustomerNotificationController : ApiController
     {
         private ICustomerNotificationService _custNotificationSvc;
@@ -15,6 +18,10 @@ namespace FictitiousInsurance.API.Controllers
             _custNotificationSvc = custNotificationSvc;
         }
 
+        /// <summary>
+        /// Action will generate Renewal Letters for due customers
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [Route("GenerateRenewalLetter")]
         public HttpResponseMessage GenerateRenewalLetter()

@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace FictitiousInsurance.Business
 {
+    /// <summary>
+    /// Service responsible for all customer related activities
+    /// </summary>
     public class CustomerService : ICustomerService
     {
         private ICustomerNotificationRepository _custNotifRepo;
@@ -21,9 +24,9 @@ namespace FictitiousInsurance.Business
         /// <returns>List<CustomerModel></returns>
         public List<CustomerModel> GetPolicyDueCustomerDetails()
         {
-            var _policyDueCustomers = _custNotifRepo.GetPolicyDueCustomers();
-            _paymentSvc.CalculatePremiumDetails(_policyDueCustomers);
-            return _policyDueCustomers;
+            var policyDueCustomers = _custNotifRepo.GetPolicyDueCustomers();
+            _paymentSvc.CalculatePremiumDetails(policyDueCustomers);
+            return policyDueCustomers;
         }
     }
 }

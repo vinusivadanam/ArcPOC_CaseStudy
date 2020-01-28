@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace FictitiousInsurance.Business
 {
+    /// <summary>
+    /// Service responsible for all kind of customer notifications
+    /// </summary>
     public class CustomerNotificationService : ICustomerNotificationService
     {
         private ICustomerService _custSvc;
@@ -24,8 +27,8 @@ namespace FictitiousInsurance.Business
         /// <returns>String: Notification file generation response </returns>
         public ApiResponse GenerateRenewalNotificationLetter()
         {
-            var _policyDueCustomers = _custSvc.GetPolicyDueCustomerDetails();
-            var customerNotificationDetails = MapCustomerToRenewalNotification(_policyDueCustomers);
+            var policyDueCustomers = _custSvc.GetPolicyDueCustomerDetails();
+            var customerNotificationDetails = MapCustomerToRenewalNotification(policyDueCustomers);
             var fileTemplate = _custNotifRepo.GetRenewalNotificationTemplate();
             ApiResponse response = new ApiResponse();
             customerNotificationDetails.ForEach(x => {
@@ -74,6 +77,7 @@ namespace FictitiousInsurance.Business
             {
                 throw new TechnicalExceptions("Mapping failed Customer data is null");
             }
+            //ToDo : AutoMapper is a nice to have feature
             customer.ForEach(x =>
                 {
                     notificationList.Add(new RenewalNotificationModel()

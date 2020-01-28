@@ -7,6 +7,9 @@ using System.IO;
 
 namespace FictitiousInsurance.DataAccess
 {
+    /// <summary>
+    /// Repo which communicate with CSV files and read data from it.
+    /// </summary>
     public class CSVDataAccess : IDataAccess
     {
         /// <summary>
@@ -24,17 +27,17 @@ namespace FictitiousInsurance.DataAccess
                     using (var sr = new StreamReader(filePath))
                     {
                         string fileData;
-                        string[] _records;
+                        string[] records;
                         int x = 0;
                         while (!sr.EndOfStream)
                         {
                             fileData = sr.ReadLine();
                             //Skipping Header row
                             if (x++ == 0) continue;
-                            _records = fileData.Split(';');
-                            if (_records.Length >= 0 && _records[0].Trim().Length > 0)
+                            records = fileData.Split(';');
+                            if (records.Length >= 0 && records[0].Trim().Length > 0)
                             {
-                                var rowCells = _records[0].Split(',');
+                                var rowCells = records[0].Split(',');
 
                                 dueList.Add(new CustomerModel()
                                 {

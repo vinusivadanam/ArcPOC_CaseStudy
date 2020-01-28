@@ -62,11 +62,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="BusinessService\CustomerServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FictitiousInsurance.Business\FictitiousInsurance.Business.csproj">
+      <Project>{74E3B162-FF37-4DBE-B252-B4AF863E6F79}</Project>
+      <Name>FictitiousInsurance.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FictitiousInsurance.DataAccess\FictitiousInsurance.DataAccess.csproj">
+      <Project>{29712A5F-B9FC-44DF-8BBF-63CD9A0A2C7B}</Project>
+      <Name>FictitiousInsurance.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FictitiousInsurance.Model\FictitiousInsurance.Model.csproj">
+      <Project>{6D70FCFF-2F44-41A1-B76C-5C61A82AA2C1}</Project>
+      <Name>FictitiousInsurance.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

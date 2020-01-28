@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace FictitiousInsurance.DataAccess
 {
+    /// <summary>
+    /// The responsible to do all the notification things
+    /// </summary>
     public class CustomerNotificationRepository : ICustomerNotificationRepository
     {
         IDataAccess _dataAccess;

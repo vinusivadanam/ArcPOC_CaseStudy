@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace FictitiousInsurance.Business
 {
+    /// <summary>
+    /// Service responsible for all payment related calculations
+    /// </summary>
     public class PaymentService : IPaymentService
     {
         private float creditServiceRate = 0.05F;
@@ -22,7 +25,7 @@ namespace FictitiousInsurance.Business
         /// <returns>bool: Success</returns>
         public bool CalculatePremiumDetails(List<CustomerModel> _policyDueCustomers)
         {
-            bool res = false;
+            bool res;
             foreach(var x in _policyDueCustomers)
             {
                 if (x.PaymentDetails == null)
@@ -45,7 +48,9 @@ namespace FictitiousInsurance.Business
         {
 
             double mAvg = x.PaymentDetails.TotalPremium / 12;
+            //Getting monthly pund
             var mPount = Math.Truncate(mAvg);
+            //Getting pence
             var mPence = (mAvg - mPount) * 100;
             var balPence = mPence - Math.Truncate(mPence);
             mPence = mPence - balPence;
@@ -58,18 +63,18 @@ namespace FictitiousInsurance.Business
         }
         private double CalculateAvgMonthlyPremium(CustomerModel x)
         {
-                double _avgMontlyPremium = x.PaymentDetails.TotalPremium / 12;
-                return Math.Round(_avgMontlyPremium, 2);
+                double avgMontlyPremium = x.PaymentDetails.TotalPremium / 12;
+                return Math.Round(avgMontlyPremium, 2);
         }
         private double CalculateTotalPremium(CustomerModel x)
         {
-                double _totalPremium = x.PaymentDetails.AnnualPremium + x.PaymentDetails.CreditCharge;
-                return Math.Round(_totalPremium, 2);
+                double totalPremium = x.PaymentDetails.AnnualPremium + x.PaymentDetails.CreditCharge;
+                return Math.Round(totalPremium, 2);
         }
         private double CalculateCreditCharge(CustomerModel x)
         {
-                double _creditCharge = x.PaymentDetails.AnnualPremium * creditServiceRate;
-                return Math.Round(_creditCharge, 2);
+                double creditCharge = x.PaymentDetails.AnnualPremium * creditServiceRate;
+                return Math.Round(creditCharge, 2);
         }
     }
 }
