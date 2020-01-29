@@ -1,12 +1,7 @@
-﻿
-using FictitiousInsurance.Common;
-using FictitiousInsurance.Helper;
+﻿using FictitiousInsurance.Helper;
 using FictitiousInsurance.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FictitiousInsurance.Business
 {

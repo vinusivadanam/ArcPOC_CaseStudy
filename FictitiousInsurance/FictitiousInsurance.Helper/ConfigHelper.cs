@@ -1,5 +1,4 @@
 ﻿using FictitiousInsurance.Common;
-using System;
 using System.Configuration;
 
 namespace FictitiousInsurance.Helper
