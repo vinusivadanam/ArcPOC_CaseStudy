@@ -10,7 +10,7 @@ namespace FictitiousInsurance.Business
     /// </summary>
     public class PaymentService : IPaymentService
     {
-        private float creditServiceRate = 0.05F;
+        private float _creditServiceRate = 0.05F;
         public PaymentService()
         { }
         /// <summary>
@@ -20,7 +20,11 @@ namespace FictitiousInsurance.Business
         /// <returns>bool: Success</returns>
         public bool CalculatePremiumDetails(List<CustomerModel> _policyDueCustomers)
         {
-            bool res;
+            if (_policyDueCustomers == null)
+            {
+                LogHelper.LogException($"PaymentService.CalculatePremiumDetails, No details available.");
+                return false;
+            }
             foreach(var x in _policyDueCustomers)
             {
                 if (x.PaymentDetails == null)
@@ -36,8 +40,7 @@ namespace FictitiousInsurance.Business
                 }
             }
 
-            res = true;
-            return res;
+            return true;
         }
         private void CalculateMonthlyPayAmounts(CustomerModel x)
         {
@@ -68,7 +71,7 @@ namespace FictitiousInsurance.Business
         }
         private double CalculateCreditCharge(CustomerModel x)
         {
-                double creditCharge = x.PaymentDetails.AnnualPremium * creditServiceRate;
+                double creditCharge = x.PaymentDetails.AnnualPremium * _creditServiceRate;
                 return Math.Round(creditCharge, 2);
         }
     }
