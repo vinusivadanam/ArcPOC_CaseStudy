@@ -25,12 +25,12 @@ namespace FictitiousInsurance.DataAccess
 
         /// <summary>
         /// Get Renewal notification template from config path
-        /// config Key : RenealNotifFileTemplate
+        /// config Key : RenewalNotifFileTemplate
         /// </summary>
         /// <returns>string: file template</returns>
         public string GetRenewalNotificationTemplate()
         {
-            var filePath = ConfigHelper.GetConfigValue("RenealNotifFileTemplate");
+            var filePath = ConfigHelper.GetConfigValue("RenewalNotifFileTemplate");
             return FileHelper.ReadTextFile(filePath);
         }
 

@@ -1,0 +1,42 @@
+FictitiousInsurance.API README
+===========================================================
+
+Source File Setup
+1. Now source file expected is a CSV one
+2. File Path should be specified in Web.Config AppSettings
+3. AppSettings Key name for source file will be "InputFileLocation"
+
+Template Setup
+1. Template file is a text file with proper place holders (Sample structure provided)
+2. Path should be specified in Web.Config AppSettings
+3. AppSettings Key name for template file will be "RenewalNotifFileTemplate"
+
+Template Format
+========================================**********************
+@DateVal
+FAO: @FullName
+
+RE: Your Renewal
+
+Dear @Title. @Surname
+
+We hereby invite you to renew your Insurance Policy, subject to the following terms.
+
+Your chosen insurance product is @ProductName.
+
+The amount payable to you in the event of a valid claim will be £@PayoutAmount.
+
+Your annual premium will be £@AnnualPremium.
+
+If you choose to pay by Direct Debit, we will add a credit charge of £@CreditCharge, bringing the total to £@TotCreditCharge. This is payable by an initial payment of £@InitMonthlyPayAmt, followed by 11 payments of £@OthMonthlyPayAmt each.
+
+Please get in touch with us to arrange your renewal by visiting https://www.regallutoncodingtest.co.uk/renew or calling us on 01625 123456.
+
+Kind Regards
+
+Regal Luton
+========================================**********************
+
+Output File Location
+1. Output file location should be defined in Web.Config AppSettings.
+2. AppSettings Key name for output file location will be "OutputFileLocation"

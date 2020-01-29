@@ -12,7 +12,7 @@ namespace FictitiousInsurance.DataAccess
         List<CustomerModel> GetPolicyDueCustomers();
         /// <summary>
         /// Get Renewal notification template from config path
-        /// config Key : RenealNotifFileTemplate
+        /// config Key : RenewalNotifFileTemplate
         /// </summary>
         /// <returns>string: file template</returns>
         string GetRenewalNotificationTemplate();
