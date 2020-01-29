@@ -1,4 +1,4 @@
-﻿using FictitiousInsurance.Common;
+﻿using FictitiousInsurance.Model;
 
 namespace FictitiousInsurance.Business
 {

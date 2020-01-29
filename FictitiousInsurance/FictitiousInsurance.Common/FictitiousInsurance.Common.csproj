@@ -41,7 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\TechnicalExceptions.cs" />
-    <Compile Include="Models\ApiResponse.cs" />
+    <Compile Include="Models\AppModels\ApiResponse.cs" />
+    <Compile Include="Models\CustomerModels\CustomerModel.cs" />
+    <Compile Include="Models\NotificationModels\RenewalNotificationModel.cs" />
+    <Compile Include="Models\PaymentModels\PaymentModel.cs" />
+    <Compile Include="Models\ProductModels\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

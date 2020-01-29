@@ -62,10 +62,6 @@
       <Project>{2226BA40-5FDD-4BEE-A6F0-9022E17C3FB3}</Project>
       <Name>FictitiousInsurance.Helper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FictitiousInsurance.Model\FictitiousInsurance.Model.csproj">
-      <Project>{6D70FCFF-2F44-41A1-B76C-5C61A82AA2C1}</Project>
-      <Name>FictitiousInsurance.Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

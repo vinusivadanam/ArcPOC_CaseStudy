@@ -1,4 +1,4 @@
-﻿namespace FictitiousInsurance.Common
+﻿namespace FictitiousInsurance.Model
 {
     public class ApiResponse
     {

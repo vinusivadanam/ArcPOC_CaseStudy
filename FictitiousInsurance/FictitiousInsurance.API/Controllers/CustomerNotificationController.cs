@@ -1,5 +1,6 @@
 ﻿using FictitiousInsurance.Business;
 using FictitiousInsurance.Common;
+using FictitiousInsurance.Model;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
