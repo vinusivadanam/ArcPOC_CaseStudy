@@ -1,21 +1,27 @@
-﻿using FictitiousInsurance.Common;
-using FictitiousInsurance.Helper;
-using FictitiousInsurance.Model;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿//-----------------------------------------------------------------------
+// <copyright file="CSVDataAccess.cs" company="FictiousInsurance">
+// Data source access for CSV
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace FictitiousInsurance.DataAccess
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using FictitiousInsurance.Common;
+    using FictitiousInsurance.Helper;
+    using FictitiousInsurance.Model;
+
     /// <summary>
-    /// Repo which communicate with CSV files and read data from it.
+    /// Repository which communicate with CSV files and read data from it.
     /// </summary>
     public class CSVDataAccess : IDataAccess
     {
         /// <summary>
         /// Get Customer details for policy expiring soon
         /// </summary>
-        /// <returns>List<CustomerModel></returns>
+        /// <returns>List of Customer Model</returns>
         public List<CustomerModel> GetPolicyDueCustomers()
         {
             var dueList = new List<CustomerModel>();
@@ -32,8 +38,12 @@ namespace FictitiousInsurance.DataAccess
                         while (!sr.EndOfStream)
                         {
                             fileData = sr.ReadLine();
-                            //Skipping Header row
-                            if (x++ == 0) continue;
+                            ////Skipping Header row
+                            if (x++ == 0)
+                            {
+                                continue;
+                            }
+
                             records = fileData.Split(';');
                             if (records.Length >= 0 && records[0].Trim().Length > 0)
                             {
@@ -41,7 +51,6 @@ namespace FictitiousInsurance.DataAccess
 
                                 dueList.Add(new CustomerModel()
                                 {
-
                                     CustomerId = long.Parse(rowCells[0]),
                                     Title = rowCells[1],
                                     FirstName = rowCells[2],
@@ -58,7 +67,6 @@ namespace FictitiousInsurance.DataAccess
                                 });
                             }
                         }
-                        sr.Close();
                     }
                 }
                 catch (Exception ex)

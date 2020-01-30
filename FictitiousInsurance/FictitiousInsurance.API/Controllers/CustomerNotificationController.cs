@@ -1,36 +1,47 @@
-﻿using FictitiousInsurance.Business;
-using FictitiousInsurance.Common;
-using FictitiousInsurance.Model;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="CustomerNotificationController.cs" company="FictiousInsurance">
+// Customer Notification Controller
+// </copyright>
+//-----------------------------------------------------------------------
 namespace FictitiousInsurance.API.Controllers
 {
+    using System.Net;
+    using System.Net.Http;
+    using System.Web.Http;
+    using FictitiousInsurance.Business;
+    using FictitiousInsurance.Common;
+    using FictitiousInsurance.Model;
+
     /// <summary>
     /// Controller will contain all the Notification related actions
     /// </summary>
     public class CustomerNotificationController : ApiController
     {
-        private ICustomerNotificationService _custNotificationSvc;
+        /// <summary>
+        /// Customer notification service reference
+        /// </summary>
+        private ICustomerNotificationService custNotificationSvc;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomerNotificationController" /> class
+        /// </summary>
+        /// <param name="custNotificationSvc">CustomerNotificationService object</param>
         public CustomerNotificationController(ICustomerNotificationService custNotificationSvc)
         {
-            _custNotificationSvc = custNotificationSvc;
+            this.custNotificationSvc = custNotificationSvc;
         }
 
         /// <summary>
         /// Action will generate Renewal Letters for due customers
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Http Response</returns>
         [HttpPost]
         [Route("GenerateRenewalLetter")]
         public HttpResponseMessage GenerateRenewalLetter()
         {
             try
             {
-                var resp = _custNotificationSvc.GenerateRenewalNotificationLetter();
-
+                var resp = this.custNotificationSvc.GenerateRenewalNotificationLetter();
                 return Request.CreateResponse(HttpStatusCode.OK, resp);
             }
             catch (TechnicalExceptions ex)
@@ -38,6 +49,5 @@ namespace FictitiousInsurance.API.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new ApiResponse { Success = false, Message = ex.Message });
             }
         }
-        
     }
 }

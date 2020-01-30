@@ -1,43 +1,60 @@
-﻿using FictitiousInsurance.Business;
-using FictitiousInsurance.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
+﻿//-----------------------------------------------------------------------
+// <copyright file="PaymentServiceTest.cs" company="FictiousInsurance">
+// Test methods for customer service
+// </copyright>
+//-----------------------------------------------------------------------
 
 namespace FictitiousInsurance.Tests
 {
-    [TestClass()]
+    using System.Collections.Generic;
+    using FictitiousInsurance.Business;
+    using FictitiousInsurance.Model;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    /// <summary>
+    /// Payment service test class
+    /// </summary>
+    [TestClass]
     public class PaymentServiceTest
     {
-        IPaymentService _paymentSvc;
+        /// <summary>
+        /// Payment Service connect
+        /// </summary>
+        private IPaymentService paymentSvc;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PaymentServiceTest" /> class
+        /// </summary>
         public PaymentServiceTest()
         {
-            _paymentSvc = new PaymentService();
+            this.paymentSvc = new PaymentService();
         }
 
-        [TestMethod()]
+        /// <summary>
+        /// CalculatePremiumDetails when pass CustomerPaymentDetails as Null returns Result as False
+        /// </summary>
+        [TestMethod]
         public void CalculatePremiumDetails_CustomerPaymentDetailsNull_ResultFalse()
         {
-            //Arrange
+            ////Arrange
             PaymentModel paymentDetails = null;
-
-            //Act
-            var result = _paymentSvc.CalculatePremiumDetails(paymentDetails);
-
-            //Asset
+            ////Act
+            var result = this.paymentSvc.CalculatePremiumDetails(paymentDetails);
+            ////Asset
             Assert.IsTrue(result == false);
         }
 
-        [TestMethod()]
+        /// <summary>
+        /// CalculatePremiumDetails when pass CustomerPaymentDetails With PaymentDetails returns Result including Calculated Values
+        /// </summary>
+        [TestMethod]
         public void CalculatePremiumDetails_CustomerPaymentDetailsWithPaymentDetails_ResultCalculatedValues()
         {
-            //Arrange
-            PaymentModel paymentDetails = GetPayment();
-
-            //Act
-            var result = _paymentSvc.CalculatePremiumDetails(paymentDetails);
-
-            //Asset
+            ////Arrange
+            PaymentModel paymentDetails = this.GetPayment();
+            ////Act
+            var result = this.paymentSvc.CalculatePremiumDetails(paymentDetails);
+            ////Asset
             Assert.IsTrue(result == true);
             Assert.IsTrue(paymentDetails.AvgMonthlyPremium == 4.38);
             Assert.IsTrue(paymentDetails.CreditCharge == 2.5);
@@ -46,21 +63,34 @@ namespace FictitiousInsurance.Tests
             Assert.IsTrue(paymentDetails.TotalPremium == 52.5);
         }
 
+        /// <summary>
+        /// Get Customer list object
+        /// </summary>
+        /// <returns>List of customers</returns>
         private List<CustomerModel> GetCustomerList()
         {
-            return new List<CustomerModel> { new CustomerModel() {
-            CustomerId = 123,
-            FirstName = "TestName",
-            SurName = "Surname",
-            Title = "Mr",
-            ProductDetails = null,
-            PaymentDetails = new PaymentModel{ 
-                PayoutAmount = 83205.5,
-                AnnualPremium = 50
-            }
-            } };
+            return new List<CustomerModel> 
+            { 
+                new CustomerModel() 
+                {
+                    CustomerId = 123,
+                    FirstName = "TestName",
+                    SurName = "Surname",
+                    Title = "Mr",
+                    ProductDetails = null,
+                    PaymentDetails = new PaymentModel
+                    { 
+                        PayoutAmount = 83205.5,
+                        AnnualPremium = 50
+                    }
+                } 
+            };
         }
 
+        /// <summary>
+        /// Get payment details
+        /// </summary>
+        /// <returns>Payment model</returns>
         private PaymentModel GetPayment()
         {
             return new PaymentModel
