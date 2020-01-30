@@ -40,3 +40,7 @@ Regal Luton
 Output File Location
 1. Output file location should be defined in Web.Config AppSettings.
 2. AppSettings Key name for output file location will be "OutputFileLocation"
+
+API Endpoint
+	  URL 		- https://localhost:44368/GenerateRenewalLetter
+	  Method	- POST
