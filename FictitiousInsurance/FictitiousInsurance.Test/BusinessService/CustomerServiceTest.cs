@@ -12,17 +12,23 @@ namespace FictitiousInsurance.Test
     public class CustomerServiceTest
     {
         ICustomerService _customerService;
+        IPaymentService _paymentService;
+        public CustomerServiceTest()
+        {
+            _paymentService = new PaymentService();
+        }
 
         [TestMethod()]
         public void GetPolicyDueCustomerDetails_NoCustomersAvailable()
         {
             //Arrange
             List<CustomerModel> customerList = null;
+            PaymentModel payment = null;
             var custNotifRepoMock = new Mock<ICustomerNotificationRepository>();
             custNotifRepoMock.Setup(x => x.GetPolicyDueCustomers()).Returns(customerList);
 
             var paymentSvcMock = new Mock<IPaymentService>();
-            paymentSvcMock.Setup(x => x.CalculatePremiumDetails(customerList)).Returns(true);
+            paymentSvcMock.Setup(x => x.CalculatePremiumDetails(payment)).Returns(true);
 
             _customerService = new CustomerService(custNotifRepoMock.Object, paymentSvcMock.Object);
 
@@ -41,10 +47,10 @@ namespace FictitiousInsurance.Test
             var custNotifRepoMock = new Mock<ICustomerNotificationRepository>();
             custNotifRepoMock.Setup(x => x.GetPolicyDueCustomers()).Returns(customerList);
 
-            var paymentSvcMock = new Mock<IPaymentService>();
-            paymentSvcMock.Setup(x => x.CalculatePremiumDetails(customerList)).Returns(true);
+            //var paymentSvcMock = new Mock<IPaymentService>();
+            //paymentSvcMock.Setup(x => x.CalculatePremiumDetails(customerList)).Returns(true);
 
-            _customerService = new CustomerService(custNotifRepoMock.Object, paymentSvcMock.Object);
+            _customerService = new CustomerService(custNotifRepoMock.Object, _paymentService);
 
             //Act
             var result = _customerService.GetPolicyDueCustomerDetails();

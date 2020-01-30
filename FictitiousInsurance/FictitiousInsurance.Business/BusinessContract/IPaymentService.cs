@@ -8,8 +8,8 @@ namespace FictitiousInsurance.Business
         /// <summary>
         /// Calculate premium details for customers
         /// </summary>
-        /// <param name="_policyDueCustomers">List<CustomerModel></param>
+        /// <param name="paymentDetails">PaymentModel</param>
         /// <returns>bool: Success</returns>
-        bool CalculatePremiumDetails(List<CustomerModel> _policyDueCustomers);
+        bool CalculatePremiumDetails(PaymentModel paymentDetails);
     }
 }

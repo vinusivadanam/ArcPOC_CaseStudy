@@ -16,48 +16,34 @@ namespace FictitiousInsurance.Tests
         }
 
         [TestMethod()]
-        public void CalculatePremiumDetails_CustomerLisIsNull_ResultFalse()
+        public void CalculatePremiumDetails_CustomerPaymentDetailsNull_ResultFalse()
         {
             //Arrange
-            List<CustomerModel> lstCustomerModel = null;
+            PaymentModel paymentDetails = null;
 
             //Act
-            var result = _paymentSvc.CalculatePremiumDetails(lstCustomerModel);
+            var result = _paymentSvc.CalculatePremiumDetails(paymentDetails);
 
             //Asset
             Assert.IsTrue(result == false);
         }
 
         [TestMethod()]
-        public void CalculatePremiumDetails_CustomerPaymentDetailsNull_ResultCalculationSkip()
-        {
-            //Arrange
-            List<CustomerModel> lstCustomerModel = GetCustomerList();
-            lstCustomerModel[0].PaymentDetails = null;
-
-            //Act
-            var result = _paymentSvc.CalculatePremiumDetails(lstCustomerModel);
-
-            //Asset
-            Assert.IsTrue(result == true);
-        }
-
-        [TestMethod()]
         public void CalculatePremiumDetails_CustomerPaymentDetailsWithPaymentDetails_ResultCalculatedValues()
         {
             //Arrange
-            List<CustomerModel> lstCustomerModel = GetCustomerList();
+            PaymentModel paymentDetails = GetPayment();
 
             //Act
-            var result = _paymentSvc.CalculatePremiumDetails(lstCustomerModel);
+            var result = _paymentSvc.CalculatePremiumDetails(paymentDetails);
 
             //Asset
             Assert.IsTrue(result == true);
-            Assert.IsTrue(lstCustomerModel[0].PaymentDetails.AvgMonthlyPremium == 4.38);
-            Assert.IsTrue(lstCustomerModel[0].PaymentDetails.CreditCharge == 2.5);
-            Assert.IsTrue(lstCustomerModel[0].PaymentDetails.InitialMonthlyPayAmount == 4.43);
-            Assert.IsTrue(lstCustomerModel[0].PaymentDetails.OtherMonthlyPayAmount == 4.37);
-            Assert.IsTrue(lstCustomerModel[0].PaymentDetails.TotalPremium == 52.5);
+            Assert.IsTrue(paymentDetails.AvgMonthlyPremium == 4.38);
+            Assert.IsTrue(paymentDetails.CreditCharge == 2.5);
+            Assert.IsTrue(paymentDetails.InitialMonthlyPayAmount == 4.43);
+            Assert.IsTrue(paymentDetails.OtherMonthlyPayAmount == 4.37);
+            Assert.IsTrue(paymentDetails.TotalPremium == 52.5);
         }
 
         private List<CustomerModel> GetCustomerList()
@@ -75,6 +61,13 @@ namespace FictitiousInsurance.Tests
             } };
         }
 
-
+        private PaymentModel GetPayment()
+        {
+            return new PaymentModel
+            {
+                PayoutAmount = 83205.5,
+                AnnualPremium = 50
+            };
+        }
     }
 }

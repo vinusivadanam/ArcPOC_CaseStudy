@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FictitiousInsurance.Business", "FictitiousInsurance.Business\FictitiousInsurance.Business.csproj", "{74E3B162-FF37-4DBE-B252-B4AF863E6F79}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FictitiousInsurance.Helper", "FictitiousInsurance.Helper\FictitiousInsurance.Helper.csproj", "{2226BA40-5FDD-4BEE-A6F0-9022E17C3FB3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FictitiousInsurance.Model", "FictitiousInsurance.Model\FictitiousInsurance.Model.csproj", "{6D70FCFF-2F44-41A1-B76C-5C61A82AA2C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FictitiousInsurance.DataAccess", "FictitiousInsurance.DataAccess\FictitiousInsurance.DataAccess.csproj", "{29712A5F-B9FC-44DF-8BBF-63CD9A0A2C7B}"
 EndProject
@@ -31,10 +29,6 @@ Global
 		{2226BA40-5FDD-4BEE-A6F0-9022E17C3FB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2226BA40-5FDD-4BEE-A6F0-9022E17C3FB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2226BA40-5FDD-4BEE-A6F0-9022E17C3FB3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D70FCFF-2F44-41A1-B76C-5C61A82AA2C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D70FCFF-2F44-41A1-B76C-5C61A82AA2C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D70FCFF-2F44-41A1-B76C-5C61A82AA2C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D70FCFF-2F44-41A1-B76C-5C61A82AA2C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{29712A5F-B9FC-44DF-8BBF-63CD9A0A2C7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29712A5F-B9FC-44DF-8BBF-63CD9A0A2C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29712A5F-B9FC-44DF-8BBF-63CD9A0A2C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU

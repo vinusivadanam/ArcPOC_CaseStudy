@@ -13,39 +13,18 @@ namespace FictitiousInsurance.Business
         private float _creditServiceRate = 0.05F;
         public PaymentService()
         { }
-        /// <summary>
-        /// Calculate premium details for customers
-        /// </summary>
-        /// <param name="_policyDueCustomers">List<CustomerModel></param>
-        /// <returns>bool: Success</returns>
-        public bool CalculatePremiumDetails(List<CustomerModel> _policyDueCustomers)
+        
+        public bool CalculatePremiumDetails(PaymentModel paymentDetails)
         {
-            if (_policyDueCustomers == null)
+            if (paymentDetails == null || paymentDetails.AnnualPremium <= 0)
             {
-                LogHelper.LogException($"PaymentService.CalculatePremiumDetails, No details available.");
+                LogHelper.LogException($"PaymentService.CalculateMonthlyPayAmounts, Invalid Annual Premium.");
                 return false;
             }
-            foreach(var x in _policyDueCustomers)
-            {
-                if (x.PaymentDetails == null)
-                {
-                    LogHelper.LogException($"PaymentService.CalculatePremiumDetails failed for customer {x.CustomerId}, No payment information available.");
-                }
-                else
-                {
-                    x.PaymentDetails.CreditCharge = CalculateCreditCharge(x);
-                    x.PaymentDetails.TotalPremium = CalculateTotalPremium(x);
-                    x.PaymentDetails.AvgMonthlyPremium = CalculateAvgMonthlyPremium(x);
-                    CalculateMonthlyPayAmounts(x);
-                }
-            }
-
-            return true;
-        }
-        private void CalculateMonthlyPayAmounts(CustomerModel x)
-        {
-
-            double mAvg = x.PaymentDetails.TotalPremium / 12;
+            paymentDetails.CreditCharge = CalculateCreditCharge(paymentDetails.AnnualPremium);
+            paymentDetails.TotalPremium = CalculateTotalPremium(paymentDetails.AnnualPremium, paymentDetails.CreditCharge);
+            paymentDetails.AvgMonthlyPremium = CalculateAvgMonthlyPremium(paymentDetails.TotalPremium);
+            double mAvg = paymentDetails.TotalPremium / 12;
             //Getting monthly pund
             var mPount = Math.Truncate(mAvg);
             //Getting pence
@@ -55,23 +34,24 @@ namespace FictitiousInsurance.Business
             var otherMonthlyPayAmount = mPount + (mPence / 100);
             var initialMonthlyPayAmount = otherMonthlyPayAmount + (balPence / 100 * 12);
 
-            x.PaymentDetails.OtherMonthlyPayAmount = Math.Round(otherMonthlyPayAmount, 2);
-            x.PaymentDetails.InitialMonthlyPayAmount = Math.Round(initialMonthlyPayAmount, 2);
+            paymentDetails.OtherMonthlyPayAmount = Math.Round(otherMonthlyPayAmount, 2);
+            paymentDetails.InitialMonthlyPayAmount = Math.Round(initialMonthlyPayAmount, 2);
+            return true;
 
         }
-        private double CalculateAvgMonthlyPremium(CustomerModel x)
+        private double CalculateAvgMonthlyPremium(double totalPremium)
         {
-                double avgMontlyPremium = x.PaymentDetails.TotalPremium / 12;
+                double avgMontlyPremium = totalPremium / 12;
                 return Math.Round(avgMontlyPremium, 2);
         }
-        private double CalculateTotalPremium(CustomerModel x)
+        private double CalculateTotalPremium(double annualPremium, double creditCharge)
         {
-                double totalPremium = x.PaymentDetails.AnnualPremium + x.PaymentDetails.CreditCharge;
+                double totalPremium = annualPremium + creditCharge;
                 return Math.Round(totalPremium, 2);
         }
-        private double CalculateCreditCharge(CustomerModel x)
+        private double CalculateCreditCharge(double annualPremium)
         {
-                double creditCharge = x.PaymentDetails.AnnualPremium * _creditServiceRate;
+                double creditCharge = annualPremium * _creditServiceRate;
                 return Math.Round(creditCharge, 2);
         }
     }
