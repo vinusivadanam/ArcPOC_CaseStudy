@@ -48,6 +48,8 @@
     <Compile Include="BusinessService\CustomerService.cs" />
     <Compile Include="BusinessService\PaymentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceFactories\ServiceFactory.cs" />
+    <Compile Include="ServiceFactoryContracts\IServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FictitiousInsurance.Common\FictitiousInsurance.Common.csproj">

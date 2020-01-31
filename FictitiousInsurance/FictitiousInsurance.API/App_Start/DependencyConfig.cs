@@ -5,9 +5,11 @@
 //-----------------------------------------------------------------------
 namespace FictitiousInsurance.API
 {
+    using System;
     using System.Web.Http;
     using System.Web.Mvc;
     using FictitiousInsurance.Business;
+    using FictitiousInsurance.Business.Factories;
     using FictitiousInsurance.DataAccess;
     using SimpleInjector;
 
@@ -26,7 +28,7 @@ namespace FictitiousInsurance.API
             container.Register<ICustomerService, CustomerService>();
             container.Register<ICustomerNotificationRepository, CustomerNotificationRepository>();
             container.Register<IDataAccess, CSVDataAccess>();
-            container.Register<IPaymentService, PaymentService>();
+            container.RegisterInstance<IServiceFactory>(new ServiceFactory());
             container.Verify();
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
             GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorDependencyResolver(container);

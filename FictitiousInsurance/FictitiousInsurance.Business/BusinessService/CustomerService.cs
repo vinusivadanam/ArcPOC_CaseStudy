@@ -6,6 +6,7 @@
 namespace FictitiousInsurance.Business
 {
     using System.Collections.Generic;
+    using FictitiousInsurance.Business.Factories;
     using FictitiousInsurance.DataAccess;
     using FictitiousInsurance.Helper;
     using FictitiousInsurance.Model;
@@ -26,14 +27,19 @@ namespace FictitiousInsurance.Business
         private IPaymentService paymentService;
 
         /// <summary>
+        /// Service factory object
+        /// </summary>
+        private IServiceFactory serviceFactory;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CustomerService" /> class
         /// </summary>
         /// <param name="custNotifRepo">Customer repository</param>
-        /// <param name="paymentSvc">Payment Service</param>
-        public CustomerService(ICustomerNotificationRepository custNotifRepo, IPaymentService paymentSvc)
+        /// <param name="serviceFactory">Service Factory</param>
+        public CustomerService(ICustomerNotificationRepository custNotifRepo, IServiceFactory serviceFactory)
         {
             this.custNotifRepository = custNotifRepo;
-            this.paymentService = paymentSvc;
+            this.serviceFactory = serviceFactory;
         }
 
         /// <summary>
@@ -52,6 +58,7 @@ namespace FictitiousInsurance.Business
 
             foreach (var customer in policyDueCustomers)
             {
+                this.SetPaymentSystemForProduct(customer.ProductDetails.ProductName);
                 if (!this.CalculateCustomerPremiumDetails(customer.PaymentDetails))
                 {
                     LogHelper.LogException($"CustomerService.GetPolicyDueCustomerDetails: Payment calculation failed for customer:{customer.CustomerId}");
@@ -77,6 +84,15 @@ namespace FictitiousInsurance.Business
             this.paymentService.CalculatePremiumDetails(paymentDetails);
 
             return true;
+        }
+
+        /// <summary>
+        /// Set the payment service type based on product
+        /// </summary>
+        /// <param name="productName">Product name</param>
+        private void SetPaymentSystemForProduct(string productName)
+        {
+            this.paymentService = this.serviceFactory.GetPaymentService(productName);
         }
     }
 }

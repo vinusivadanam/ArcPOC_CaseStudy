@@ -9,6 +9,7 @@ namespace FictitiousInsurance.Test
     using System.Collections.Generic;
     using System.Linq;
     using FictitiousInsurance.Business;
+    using FictitiousInsurance.Business.Factories;
     using FictitiousInsurance.DataAccess;
     using FictitiousInsurance.Model;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -46,12 +47,11 @@ namespace FictitiousInsurance.Test
         {
             ////Arrange
             List<CustomerModel> customerList = null;
-            PaymentModel payment = null;
             var custNotifRepoMock = new Mock<ICustomerNotificationRepository>();
             custNotifRepoMock.Setup(x => x.GetPolicyDueCustomers()).Returns(customerList);
-            var paymentSvcMock = new Mock<IPaymentService>();
-            paymentSvcMock.Setup(x => x.CalculatePremiumDetails(payment)).Returns(true);
-            this.customerService = new CustomerService(custNotifRepoMock.Object, paymentSvcMock.Object);
+            var serviceFactMock = new Mock<IServiceFactory>();
+            serviceFactMock.Setup(x => x.GetPaymentService("default")).Returns(this.paymentService);
+            this.customerService = new CustomerService(custNotifRepoMock.Object, serviceFactMock.Object);
             ////Act
             var result = this.customerService.GetPolicyDueCustomerDetails();
             ////Assert
@@ -68,7 +68,9 @@ namespace FictitiousInsurance.Test
             List<CustomerModel> customerList = this.GetCustomerList();
             var custNotifRepoMock = new Mock<ICustomerNotificationRepository>();
             custNotifRepoMock.Setup(x => x.GetPolicyDueCustomers()).Returns(customerList);
-            this.customerService = new CustomerService(custNotifRepoMock.Object, this.paymentService);
+            var serviceFactMock = new Mock<IServiceFactory>();
+            serviceFactMock.Setup(x => x.GetPaymentService("Enhanced Cover")).Returns(this.paymentService);
+            this.customerService = new CustomerService(custNotifRepoMock.Object, serviceFactMock.Object);
             ////Act
             var result = this.customerService.GetPolicyDueCustomerDetails();
             ////Assert
