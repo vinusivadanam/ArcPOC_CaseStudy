@@ -3,3 +3,21 @@
 ################################################################################
 
 /FictitiousInsurance/.vs/FictitiousInsurance
+/.vs
+/FictitiousInsurance/.vs/config
+/FictitiousInsurance/FictitiousInsurance.API/obj/Debug
+/FictitiousInsurance/FictitiousInsurance.API/bin
+/FictitiousInsurance/FictitiousInsurance.DataAccess/bin/Debug
+/FictitiousInsurance/FictitiousInsurance.DataAccess/obj/Debug
+/FictitiousInsurance/FictitiousInsurance.DataAccess/obj/Release/CoreCompileInputs.cache
+/FictitiousInsurance/FictitiousInsurance.Test/obj/Debug
+/FictitiousInsurance/FictitiousInsurance.Test/bin/Debug
+/FictitiousInsurance/FictitiousInsurance.Model/obj
+/FictitiousInsurance/FictitiousInsurance.Model/bin/Debug
+/FictitiousInsurance/FictitiousInsurance.Helper/obj
+/FictitiousInsurance/FictitiousInsurance.Helper/bin/Debug
+/FictitiousInsurance/packages
+/FictitiousInsurance/FictitiousInsurance.Common/obj
+/FictitiousInsurance/FictitiousInsurance.Common/bin/Debug
+/FictitiousInsurance/FictitiousInsurance.Business/obj
+/FictitiousInsurance/FictitiousInsurance.Business/bin/Debug
